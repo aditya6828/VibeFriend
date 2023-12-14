@@ -1,0 +1,18 @@
+<h2> Your Profile Details </h2>
+
+<p><strong>User ID: </strong> <%= current_user.id %> </p>
+<p><strong>Name: </strong> <%= @my_profile.fname %> </p>
+<p><strong>User Name: </strong> <%= @my_profile.user_name %> </p>
+<p><strong>Bio: </strong> <%= @my_profile.bio %> </p>
+<p><strong>DOB: </strong> <%= @my_profile.birthdate %> </p>
+<p><strong>Gender: </strong> <%= @my_profile.gender %> </p>
+<p><strong>Mobile: </strong> <%= @my_profile.mobile %> </p>
+<p><strong>Address: </strong> <%= @my_profile.address %> </p>
+<p><strong>Email: </strong> <%= @my_profile.email %> </p>
+
+<% if user_signed_in? %>
+    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+<% else %>
+    <%= link_to 'Log In', new_user_session_path, class: 'green-button-style' %>
+    <%= link_to 'Sign Up', new_user_registration_path, class: 'button-style float-end' %>
+<% end %>
