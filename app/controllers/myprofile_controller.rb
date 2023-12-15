@@ -29,16 +29,22 @@ class MyprofileController < ApplicationController
 
   def create_image
     @user = current_user
-    @user.images.attach(params[:user][:images])
-    @user.update(caption: params[:user][:caption])
-    flash[:success] = "Image uploaded successfully"
-    redirect_to feed_path
+    @post = @user.posts.build(caption: params[:user][:caption])
 
+    if @post.save
+      @post.images.attach(params[:user][:images])
+      flash[:success] = "Image uploaded successfully"
+      redirect_to feed_path
+    else
+      flash.now[:error] = "Error uploading image, please check the form"
+      render :upload_image
+    end
   end
 
-  def feed
-    @feed_posts = User.all.includes(:my_profile).order(created_at: :desc)
-  end
+def feed
+  @feed_posts = Post.includes([:user, { images_attachments: :blob }]).order(created_at: :desc)
+end
+
 
   private
 
