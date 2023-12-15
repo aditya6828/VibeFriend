@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   get '/my_profile', to: 'myprofile#show' , as: 'show_my_profile'
 
   root 'home#index'
+  # get '/upload_image', to: 'myprofile#upload_image', as: 'upload_image'
+  post '/upload_image', to: 'myprofile#upload_image', as: 'upload_image'
+  get '/feed', to: 'myprofile#feed' , as: 'feed'
 
 end

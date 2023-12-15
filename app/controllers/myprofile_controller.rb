@@ -1,6 +1,6 @@
 class MyprofileController < ApplicationController
     
-  before_action :authenticate_user!, only: [:new, :create , :show]
+  before_action :authenticate_user!, only: [:new, :create , :show, :upload_image , :feed]
 
   def new
     @my_profile = current_user.build_my_profile
@@ -21,6 +21,23 @@ class MyprofileController < ApplicationController
 
   def show
     @my_profile = current_user.my_profile
+  end
+
+  def upload_image
+    @user = current_user
+  end
+
+  def create_image
+    @user = current_user
+    @user.images.attach(params[:user][:images])
+    @user.update(caption: params[:user][:caption])
+    flash[:success] = "Image uploaded successfully"
+    redirect_to feed_path
+
+  end
+
+  def feed
+    @feed_posts = User.all.includes(:my_profile).order(created_at: :desc)
   end
 
   private
