@@ -29,10 +29,9 @@ class MyprofileController < ApplicationController
 
   def create_image
     @user = current_user
-    @post = @user.posts.build(caption: params[:user][:caption])
-
+    @post = @user.posts.build(post_params)
+  
     if @post.save
-      @post.images.attach(params[:user][:images])
       flash[:success] = "Image uploaded successfully"
       redirect_to feed_path
     else
@@ -40,6 +39,13 @@ class MyprofileController < ApplicationController
       render :upload_image
     end
   end
+  
+  private
+  
+  def post_params
+    params.require(:user).permit(:comment, images_attributes: [:image]) # Permit an array of images
+  end
+  
 
 def feed
   @feed_posts = Post.includes([:user, { images_attachments: :blob }]).order(created_at: :desc)
@@ -51,5 +57,9 @@ end
   def profile_params
     params.require(:my_profile).permit(:fname, :user_name , :age , :birthdate , :gender , :bio , :mobile , :address)
   end  
+
+  def post_params
+    params.require(:user).permit(:caption, images: [])
+  end
 end
   

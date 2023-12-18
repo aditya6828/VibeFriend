@@ -1,15 +1,14 @@
 <%= form_with(model: @user, url: create_image_path, method: :post, local: true, multipart: true) do |form| %>
 
-    <div class="mb-3">
-      <%= form.label :images, class: "form-label" %>
-      <%= form.file_field :images, class: "form-control", multiple: true %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :caption, class: "form-label" %>
-      <%= form.text_area :caption, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= form.submit "Upload Image", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-  
+  <div class="mb-3">
+    <%= form.label :images, class: "form-label" %>
+    <%= form.file_field :images, class: "form-control", multiple: true %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :comment, class: "form-label" %>
+    <%= form.text_area :comment, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.submit "Upload Image", class: "btn btn-primary" %>
+  </div>
+<% end %>

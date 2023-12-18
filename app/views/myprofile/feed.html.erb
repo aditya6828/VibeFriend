@@ -1,18 +1,32 @@
-
 <%= render 'layouts/navbar' %>
 <div class="container">
   <h2>Feed</h2>
-  <% @feed_posts.each do |post| %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h4 class="card-title"><%= post.user.my_profile.user_name %></h4>
-        <p class="card-text"><%= post.caption %></p>
-        <% post.images.each do |image| %>
-          <%= image_tag(image, class: "img-fluid") %>
-        <% end %>
-        <%= link_to "Like", like_post_path(post), method: :post %>
-        <%= link_to "Comment", new_comment_path(post_id: post.id) %>
+
+  <% if @feed_posts.present? %>
+    <% @feed_posts.each do |post| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <% if post.user.present? && post.user.my_profile.present? %>
+            <h4 class="card-title"><%= post.user.my_profile.user_name %></h4>
+          <% else %>
+            <p class="text-danger">User profile not found for this post.</p>
+          <% end %>
+
+          <p class="card-text"><%= post.comment %></p>
+
+          <% if post.images.present? %>
+            <% post.images.each do |image| %>
+              <%= image_tag(image.image, class: "img-fluid") %>
+            <% end %>
+          <% end %>
+
+          <%= link_to "Like", like_post_path(post), method: :post %>
+          <%= link_to "Comment", new_comment_path(post_id: post.id) %>
+        </div>
       </div>
-    </div>
+    <% end %>
+  <% else %>
+    <h3>No posts yet</h3>
   <% end %>
+
 </div>
