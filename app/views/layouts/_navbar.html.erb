@@ -6,7 +6,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
         </li>
         <li class="nav-item">
           <%= link_to 'Upload Image', upload_image_path, class: 'nav-link' %>

@@ -1,14 +1,17 @@
+
 <%= render 'layouts/navbar' %>
 <div class="container">
-  <h2>Feed </h2>
+  <h2>Feed</h2>
   <% @feed_posts.each do |post| %>
     <div class="card mb-3">
       <div class="card-body">
-        <h4 class="card-title"><%= post.my_profile.user_name %></h4>
+        <h4 class="card-title"><%= post.user.my_profile.user_name %></h4>
         <p class="card-text"><%= post.caption %></p>
         <% post.images.each do |image| %>
           <%= image_tag(image, class: "img-fluid") %>
         <% end %>
+        <%= link_to "Like", like_post_path(post), method: :post %>
+        <%= link_to "Comment", new_comment_path(post_id: post.id) %>
       </div>
     </div>
   <% end %>
