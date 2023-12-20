@@ -1,19 +1,28 @@
 <!-- app/views/layouts/_navbar.html.erb -->
 <nav class="navbar navbar-expand navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Your Logo</a>
+    <%= link_to 'Your Logo', root_path, class: 'navbar-brand' %>
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          
-          <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
         </li>
         <li class="nav-item">
           <%= link_to 'Upload Image', upload_image_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
           <%= link_to 'My Profile', show_my_profile_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Feed', feed_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Create Group Chat', new_group_chat_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Add Friend', new_friend_request_path, class: 'nav-link' %>
+        </li>
       </ul>
     </div>
   </div>

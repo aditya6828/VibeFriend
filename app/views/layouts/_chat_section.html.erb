@@ -1,0 +1,36 @@
+<!-- app/views/layouts/_chat_section.html.erb -->
+<div id="chat-section" class="container mt-4">
+  <div class="row">
+    <!-- User List -->
+    <div class="col-md-4">
+      <h4>Users</h4>
+      <ul class="list-group">
+        <!-- Add users dynamically -->
+        <li class="list-group-item">User 1</li>
+        <li class="list-group-item">User 2</li>
+        <!-- ... -->
+      </ul>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="col-md-8">
+      <h4>Chat</h4>
+      <div id="chat-messages" class="border rounded p-3" style="height: 300px; overflow-y: scroll;">
+        <!-- Display chat messages dynamically -->
+        <p><strong>User 1:</strong> Hi there!</p>
+        <p><strong>User 2:</strong> Hello!</p>
+        <!-- ... -->
+      </div>
+
+      <!-- Message Input Form -->
+      <%= form_with(model: Message.new, url: messages_path, method: :post) do |form| %>
+        <div class="input-group mt-3">
+          <%= form.text_area :content, class: 'form-control', placeholder: 'Type your message...' %>
+          <div class="input-group-append">
+            <%= form.submit 'Send', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

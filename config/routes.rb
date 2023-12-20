@@ -12,5 +12,11 @@ Rails.application.routes.draw do
   get '/feed', to: 'myprofile#feed' , as: 'feed'
   post '/feed', to: 'myprofile#create_image', as: 'create_image'
 
+  resources :friend_requests, only: [:new , :create, :update, :destroy]
+  resources :group_chats, only: [:index, :show, :new, :create]
+
+  resources :messages
+  mount ActionCable.server, at: '/cable'
+
 
 end
