@@ -1,0 +1,10 @@
+<!-- app/views/friend_requests/index.html.erb -->
+<h1>Friend Requests</h1>
+
+<% @friend_requests.each do |request| %>
+  <p>
+    <%= "#{request.sender.email} sent a friend request to #{request.recipient.email}" %>
+    <%= link_to 'Accept', friend_request_path(request), method: :put %>
+    <%= link_to 'Reject', friend_request_path(request), method: :delete %>
+  </p>
+<% end %>

@@ -1,0 +1,12 @@
+<!-- app/views/group_chats/new.html.erb -->
+
+<h1>Create a New Group</h1>
+
+<%= form_for @group_chat do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'Group Name' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Create Group', class: 'btn btn-primary' %>
+<% end %>

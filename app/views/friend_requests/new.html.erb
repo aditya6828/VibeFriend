@@ -1,0 +1,7 @@
+<!-- app/views/friend_requests/new.html.erb -->
+<h1>New Friend Request</h1>
+
+<%= form_with model: FriendRequest.new, url: friend_requests_path, method: :post do |form| %>
+  <%= form.hidden_field :recipient_id, value: @recipient.id %>
+  <%= form.submit 'Send Friend Request' %>
+<% end %>

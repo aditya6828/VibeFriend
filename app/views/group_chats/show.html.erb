@@ -9,7 +9,8 @@
 </div>
 
 <!-- Form to submit a new message -->
-<%= form_with(model: [@group_chat, Message.new], url: group_chat_messages_path(@group_chat), method: :post) do |form| %>
+<%= form_with(model: [@group_chat, @new_message], url: group_chat_messages_path(@group_chat), method: :post) do |form| %>
   <%= form.text_area :content, class: 'form-control' %>
   <%= form.submit 'Send Message', class: 'btn btn-primary mt-2' %>
 <% end %>
+
