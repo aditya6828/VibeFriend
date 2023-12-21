@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_19_125358) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_20_091630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,7 +52,23 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_19_125358) do
     t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
   end
 
+  create_table "friends", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
+    t.boolean "accepted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friends_on_friend_id"
+    t.index ["user_id"], name: "index_friends_on_user_id"
+  end
+
   create_table "group_chats", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,6 +137,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_19_125358) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "friend_requests", "users", column: "recipient_id"
   add_foreign_key "friend_requests", "users", column: "sender_id"
+  add_foreign_key "friends", "friends"
+  add_foreign_key "friends", "users"
   add_foreign_key "images", "posts"
   add_foreign_key "messages", "friend_requests"
   add_foreign_key "messages", "group_chats"

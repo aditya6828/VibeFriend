@@ -1,0 +1,6 @@
+<!-- app/views/group_chats/index.html.erb -->
+<h1>Group Chats</h1>
+
+<% @group_chats.each do |group_chat| %>
+  <%= link_to group_chat.name, group_chat_path(group_chat) %><br>
+<% end %>
