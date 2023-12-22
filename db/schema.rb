@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_20_091630) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_22_093433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,8 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_20_091630) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.json "image"
     t.bigint "post_id", null: false
+    t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_images_on_post_id"

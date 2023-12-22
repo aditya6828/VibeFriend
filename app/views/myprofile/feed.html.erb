@@ -2,8 +2,11 @@
 
 <div class="container">
   <h2>Feed</h2>
-
+  puts "outside if condition"
+  
   <% if @feed_posts.present? %>
+  <%= puts "inside if condition" %>
+  
     <% @feed_posts.each do |post| %>
       <div class="card mb-3">
         <div class="card-body">
@@ -15,14 +18,14 @@
 
           <p class="card-text"><%= post.comment %></p>
 
-          <% if post.images.present? %>
-            <% post.images.each do |image| %>
-              <%= image_tag(image.image, class: "img-fluid") %>
+          <% if @feed_posts.present? %>
+            <% @feed_posts.images.each do |image| %>
+              <%= image_tag(image.file, class: "img-fluid") %>
             <% end %>
           <% end %>
 
-          <%= link_to "Like", like_post_path(post), method: :post %>
-          <%= link_to "Comment", new_comment_path(post_id: post.id) %>
+
+          
         </div>
       </div>
     <% end %>
