@@ -19,6 +19,11 @@ class MyprofileController < ApplicationController
 
   end
 
+  def feed
+    @feed_posts = Post.includes(user: [:my_profile], images: [file_attachment: :blob]).order(created_at: :desc)
+   
+
+  end
   def show
     @my_profile = current_user.my_profile
   end
@@ -28,8 +33,11 @@ class MyprofileController < ApplicationController
   end
 
   def create_image
+    puts "inside create function image"
     @user = current_user
-    @post = @user.posts.build(post_params)
+    @post = @user.build(post_params)
+    puts "this is file #{@post}"
+    @post.images.file = @post.file
   
     if @post.save
       flash[:success] = "Image uploaded successfully"
@@ -43,23 +51,16 @@ class MyprofileController < ApplicationController
   private
   
   def post_params
-    params.require(:user).permit(:comment, images_attributes: [:image]) # Permit an array of images
+    params.require(:user).permit(:caption, :file)
   end
   
+  
 
-def feed
-  @feed_posts = Post.includes([:user, { images_attachments: :blob }]).order(created_at: :desc)
-end
-
-
-  private
 
   def profile_params
     params.require(:my_profile).permit(:fname, :user_name , :age , :birthdate , :gender , :bio , :mobile , :address)
   end  
 
-  def post_params
-    params.require(:user).permit(:caption, images: [])
-  end
+  
 end
   

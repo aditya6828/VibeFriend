@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/upload_image', to: 'myprofile#upload_image', as: 'upload_image'
   # post '/upload_image', to: 'myprofile#upload_image', as: 'upload_image'
-  get '/feed', to: 'myprofile#feed' , as: 'feed'
-  post '/feed', to: 'myprofile#create_image', as: 'create_image'
+  get '/feed', to: 'myprofile#feed'
+  post '/create/image', to: 'myprofile#create_image'
 
   resources :friend_requests, only: [:index, :new, :create, :show, :update, :destroy]
   resources :group_chats, only: [:index, :show, :new, :create]
