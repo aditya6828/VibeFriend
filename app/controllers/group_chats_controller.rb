@@ -8,6 +8,7 @@ class GroupChatsController < ApplicationController
     def show
       @group_chat = GroupChat.find(params[:id])
       @messages = @group_chat.messages.order(created_at: :asc)
+      @new_message = @group_chat.messages.build # Build a new message for the form
     end
   
     def new

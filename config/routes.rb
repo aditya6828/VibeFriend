@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/create'
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   # resource :myprofile, only: [:new, :create]
@@ -12,11 +13,15 @@ Rails.application.routes.draw do
   get '/feed', to: 'myprofile#feed' , as: 'feed'
   post '/feed', to: 'myprofile#create_image', as: 'create_image'
 
-  resources :friend_requests, only: [:new , :create, :update, :destroy]
+  resources :friend_requests, only: [:index, :new, :create, :show, :update, :destroy]
   resources :group_chats, only: [:index, :show, :new, :create]
 
   resources :messages
   mount ActionCable.server, at: '/cable'
+
+  resources :group_chats do
+    resources :messages
+  end
 
 
 end
